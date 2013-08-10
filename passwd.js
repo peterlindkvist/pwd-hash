@@ -58,9 +58,9 @@ generate = function(domain, pwd, omitextrachars, len){
 
 var html = '';
 html += '<input type="text" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
-html += '<input type="password" placeholder="password" id="__pwd_passwd" value=""/>';
-html += '<input type="text" id="__pwd_strong" value="" />';
-html += '<input type="text" id="__pwd_weak" value="" />';
+html += '<input type="password" placeholder="enter password" id="__pwd_passwd" value=""/>';
+html += '<input type="text" placeholder="strong hash" id="__pwd_strong" value="" />';
+html += '<input type="text" placeholder="weaker hash" id="__pwd_weak" value="" />';
 html += '<input type="button" id="__pwd_btn" value="generate" />';
 var container = document.createElement('div');
 container.setAttribute('style', "position:fixed;top:0px;background-color:#F30;z-index:10000;");
@@ -74,9 +74,12 @@ for(i = 0;i<inputs.length;i++){
   el = inputs[i];
   if(el.getAttribute('type') == 'password' && el.id != '__pwd_passwd'){
     passwdelem = el
+    /*
     document.getElementById('__pwd_passwd').value = el.value
     el.value = generate(domain, el.value);
     document.getElementById('__pwd_strong').value = el.value;
+    document.getElementById('__pwd_weak').value = generate(domain, el.value, true, 8);
+    */
     break;
   }
 }

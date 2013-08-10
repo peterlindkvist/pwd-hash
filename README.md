@@ -6,9 +6,11 @@ The principles are explanined in this paper http://crypto.stanford.edu/PwdHash/p
 
 ##installation
 
-Add this code as a bookmarklet: 
-
-    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js"
+Add this code as a bookmarklet, or just paste it into the location bar in the browser on if you want to test it: 
+    
+    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";void(0);
+    
+Due to some ssl restrictions, the code can not be runned in github.com    
 
 ###Mobile safari:
 
