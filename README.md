@@ -7,16 +7,19 @@ The principles are explanined in this paper http://crypto.stanford.edu/PwdHash/p
 ##installation
 Add this text as a bookmark:
     
-    javascript:("document.body.appendChild%28document.createElement%28%22script%22%29%29.src%3D%22https%3A//raw.github.com/peterlindkvist/pwd-hash/master/passwd.js");
+    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";
 
 ###Most browsers:
 
-Drag this link to the bookmark filed: [Generate password](javascript:("document.body.appendChild%28document.createElement%28%22script%22%29%29.src%3D%22https%3A//raw.github.com/peterlindkvist/pwd-hash/master/passwd.js");)
+Drag this link to the bookmark filed: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js"'>Generate password</a>
 
 ###Mobile safari:
 
 1. Add this page as a bookmark 
-2. Find the bookmarklet below that you want. Select and copy the javascript above. 
+2. Copy this code top clipboard
+
+        javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";
+
 3. Go to your bookmarks and tap "edit". Then tap the new bookmark you just made of this page. 
 4. Edit the name to generate password, or whathever, and paste the javascript in the field for the URL.
 5. Done. 
