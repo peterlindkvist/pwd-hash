@@ -7,11 +7,11 @@ The principles are explanined in this paper http://crypto.stanford.edu/PwdHash/p
 ##installation
 Add this text as a bookmark:
     
-    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/passwd.js";
+    javascript:("document.body.appendChild%28document.createElement%28%22script%22%29%29.src%3D%22https%3A//raw.github.com/peterlindkvist/pwd-hash/master/passwd.js");
 
 ###Most browsers:
 
-Drag this link to the bookmark filed: [Generate password](javascript:("document.body.appendChild%28document.createElement%28%22script%22%29%29.src%3D%22https%3A//raw.github.com/peterlindkvist/pwd-hash/passwd.js");)
+Drag this link to the bookmark filed: [Generate password](javascript:("document.body.appendChild%28document.createElement%28%22script%22%29%29.src%3D%22https%3A//raw.github.com/peterlindkvist/pwd-hash/master/passwd.js");)
 
 ###Mobile safari:
 
