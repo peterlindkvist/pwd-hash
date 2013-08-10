@@ -8,7 +8,7 @@ The principles are explanined in this paper http://crypto.stanford.edu/PwdHash/p
 
 Add this code as a bookmarklet: 
 
-    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js"'>Generate password</a>
+    javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js"
 
 ###Mobile safari:
 
