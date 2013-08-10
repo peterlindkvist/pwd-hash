@@ -24,23 +24,30 @@ c)).finalize(b)}}});var w=d.algo={};return d}(Math);
 b=a.words,c=8*a.sigBytes,e=32*this.blockSize;b[c>>>5]|=1<<24-c%32;b[(v.ceil((c+1)/e)*e>>>5)-1]|=128;a.sigBytes=4*b.length;this._process();for(var a=this._state,b=this.cfg.outputLength/8,c=b/8,e=[],h=0;h<c;h++){var d=a[h],f=d.high,d=d.low,f=(f<<8|f>>>24)&16711935|(f<<24|f>>>8)&4278255360,d=(d<<8|d>>>24)&16711935|(d<<24|d>>>8)&4278255360;e.push(d);e.push(f)}return new u.init(e,b)},clone:function(){for(var a=r.clone.call(this),b=a._state=this._state.slice(0),c=0;25>c;c++)b[c]=b[c].clone();return a}});
 p.SHA3=r._createHelper(d);p.HmacSHA3=r._createHmacHelper(d)})(Math);
 
-var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~@#%^&*()-_=+[]{}|;:,.<>/?!";
+var simplechars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+var extrachars = "~@#%^&*()-_=+[]{}|;:,.<>/?!";
 var domain = document.location.host.split(".").splice(-2).join(".");
 
-validate = function(hash){
-  return !!(hash.match(/[0-9]/) && hash.match(/[a-z]/) && hash.match(/[A-Z]/) && hash.match(/[^0-9a-zA-Z]/))
+validate = function(hash, checkextrachars){
+  ok = !!(hash.match(/[0-9]/) && hash.match(/[a-z]/) && hash.match(/[A-Z]/))
+  if(checkextrachars){
+    ok = ok && !!hash.match(/[^0-9a-zA-Z]/)
+  }
+  return ok
 }
 
-generate = function(realm, pwd){
+generate = function(domain, pwd, omitextrachars, len){
+  var chars = simplechars + (omitextrachars ? '' : extrachars);
   var i,j,wa,hash, cl=chars.length, w;
   for(i = 0;i<100;i++){
     hash = "";
-    wa = CryptoJS.SHA3(realm + pwd + i);
-    for(j=0;j<wa.words.length;j++){
+    wa = CryptoJS.SHA3(domain + pwd + i);
+    len = len || wa.words.length
+    for(j=0;j<len;j++){
       w = wa.words[j] >>> 0
       hash += chars.charAt(w % cl);
     }
-    if(validate(hash)){
+    if(validate(hash, !omitextrachars)){
       return hash
     }
   }
@@ -50,12 +57,10 @@ generate = function(realm, pwd){
 
 
 var html = '';
-//html += '<label for="__pwd_realm">Domain</label>';
-html += '<input type="text" id="__pwd_realm" value="' + domain + '"/>';
-//html += '<label for="__pwd_passwd">Master password</label>';
-html += '<input type="password" id="__pwd_passwd" value=""/>';
-//html += '<label for="__pwd_result">Generated password</label>';
-html += '<input type="text" id="__pwd_result" value="" />';
+html += '<input type="text" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
+html += '<input type="password" placeholder="password" id="__pwd_passwd" value=""/>';
+html += '<input type="text" id="__pwd_strong" value="" />';
+html += '<input type="text" id="__pwd_weak" value="" />';
 html += '<input type="button" id="__pwd_btn" value="generate" />';
 var container = document.createElement('div');
 container.setAttribute('style', "position:fixed;top:0px;background-color:#F30;z-index:10000;");
@@ -71,16 +76,18 @@ for(i = 0;i<inputs.length;i++){
     passwdelem = el
     document.getElementById('__pwd_passwd').value = el.value
     el.value = generate(domain, el.value);
-    document.getElementById('__pwd_result').value = el.value;
+    document.getElementById('__pwd_strong').value = el.value;
     break;
   }
 }
 
 document.getElementById('__pwd_btn').onclick = function(){
-  var realm = document.getElementById('__pwd_realm').value;
+  var domain = document.getElementById('__pwd_domain').value;
   var pwd = document.getElementById('__pwd_passwd').value;
-  var hash = generate(realm, pwd);
-  document.getElementById('__pwd_result').value = hash;
+  var stronghash = generate(domain, pwd);
+  var weakhash = generate(domain, pwd, true, 8)
+  document.getElementById('__pwd_strong').value = stronghash;
+  document.getElementById('__pwd_weak').value = weakhash;
   if(passwdelem){
     passwdelem.value = hash;
   }
