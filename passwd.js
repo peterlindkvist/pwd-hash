@@ -61,12 +61,14 @@ html += '<input type="text" placeholder="domain" id="__pwd_domain" value="' + do
 html += '<input type="password" placeholder="enter password" id="__pwd_passwd" value=""/>';
 html += '<input type="text" placeholder="strong hash" id="__pwd_strong" value="" />';
 html += '<input type="text" placeholder="weaker hash" id="__pwd_weak" value="" />';
-html += '<input type="button" id="__pwd_btn" value="generate" />';
+html += '<input type="submit" id="__pwd_btn" value="generate" />';
 var container = document.createElement('div');
 container.setAttribute('style', "position:fixed;top:0px;background-color:#F30;z-index:10000;");
 container.innerHTML = html;
 document.body.appendChild(container);
-document.getElementById('__pwd_passwd').focus();
+var saltel = document.getElementById('__pwd_passwd');
+
+saltel.focus();
 
 var inputs = document.getElementsByTagName('input')
 var passwdelem, i, el
@@ -84,9 +86,9 @@ for(i = 0;i<inputs.length;i++){
   }
 }
 
-document.getElementById('__pwd_btn').onclick = function(){
+saltel.onkeydown = saltel.paste = saltel.onchange = function(e){
   var domain = document.getElementById('__pwd_domain').value;
-  var pwd = document.getElementById('__pwd_passwd').value;
+  var pwd = saltel.value;
   var stronghash = generate(domain, pwd);
   var weakhash = generate(domain, pwd, true, 8)
   document.getElementById('__pwd_strong').value = stronghash;
