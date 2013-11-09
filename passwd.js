@@ -57,44 +57,40 @@ generate = function(domain, pwd, omitextrachars, len){
 
 
 var html = '';
-html += '<input type="text" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
-html += '<input type="password" placeholder="enter password" id="__pwd_passwd" value=""/>';
-html += '<input type="text" placeholder="strong hash" id="__pwd_strong" value="" />';
-html += '<input type="text" placeholder="weaker hash" id="__pwd_weak" value="" />';
-html += '<input type="submit" id="__pwd_btn" value="generate" />';
+var style = 'style="height:100%;width:150px;margin:2px;padding:4px;border:1px solid #ccc;border-radius:2px;font-size:15px;line-height:20px"';
+html += '<input ' + style + ' type="text" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
+html += '<input ' + style + ' type="password" placeholder="enter password" id="__pwd_passwd" value=""/><br>';
+html += '<input ' + style + ' type="text" placeholder="strong hash" id="__pwd_strong" value="" />';
+html += '<input ' + style + ' type="text" placeholder="weaker hash" id="__pwd_weak" value="" />';
 var container = document.createElement('div');
-container.setAttribute('style', "position:fixed;top:0px;background-color:#F30;z-index:10000;");
+container.setAttribute('style', "position:fixed;top:0;left:0;background-color:#274d7e;z-index:10000;margin:0px;padding:2px");
 container.innerHTML = html;
 document.body.appendChild(container);
 var saltel = document.getElementById('__pwd_passwd');
 
 saltel.focus();
 
-var inputs = document.getElementsByTagName('input')
-var passwdelem, i, el
+var inputs = document.getElementsByTagName('input');
+var passwdelem = [], i, el;
+
 for(i = 0;i<inputs.length;i++){
   el = inputs[i];
   if(el.getAttribute('type') == 'password' && el.id != '__pwd_passwd'){
-    passwdelem = el
-    /*
-    document.getElementById('__pwd_passwd').value = el.value
-    el.value = generate(domain, el.value);
-    document.getElementById('__pwd_strong').value = el.value;
-    document.getElementById('__pwd_weak').value = generate(domain, el.value, true, 8);
-    */
-    break;
+    passwdelem.push(el)
   }
 }
 
-saltel.onkeydown = saltel.paste = saltel.onchange = function(e){
+saltel.onkeyup = saltel.paste = saltel.onchange = function(e){
+  var i, salt = saltel.value;
   var domain = document.getElementById('__pwd_domain').value;
-  var pwd = saltel.value;
-  var stronghash = generate(domain, pwd);
-  var weakhash = generate(domain, pwd, true, 8)
+
+  var stronghash = salt == "" ? "" : generate(domain, salt);
+  var weakhash = salt == "" ? "" : generate(domain, salt, true, 8)
   document.getElementById('__pwd_strong').value = stronghash;
   document.getElementById('__pwd_weak').value = weakhash;
-  if(passwdelem){
-    passwdelem.value = hash;
+
+  for(i = 0; i < passwdelem.length; i++){
+    passwdelem[i].value = stronghash;
   }
 }
 
