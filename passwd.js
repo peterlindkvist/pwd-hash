@@ -31,9 +31,9 @@ var domain = document.location.host.split(".").splice(-2).join(".");
 var validate = function(hash, checkextrachars){
   ok = !!(hash.match(/[0-9]/) && hash.match(/[a-z]/) && hash.match(/[A-Z]/))
   if(checkextrachars){
-    ok = ok && !!hash.match(/[^0-9a-zA-Z]/)
+    ok = ok && !!hash.match(/[^0-9a-zA-Z]/);
   }
-  return ok
+  return ok;
 }
 
 var generate = function(domain, pwd, omitextrachars, len){
@@ -42,28 +42,25 @@ var generate = function(domain, pwd, omitextrachars, len){
   for(i = 0;i<100;i++){
     hash = "";
     wa = CryptoJS.SHA3(domain + pwd + i);
-    len = len || wa.words.length
+    len = len || wa.words.length;
     for(j=0;j<len;j++){
       w = wa.words[j] >>> 0
       hash += chars.charAt(w % cl);
     }
     if(validate(hash, !omitextrachars)){
-      return hash
+      return hash;
     }
   }
   return ""
 }
 
 var updatepasswords = function(){
-  stronghash = document.getElementById('__pwd_strong').value;
-  weakhash = document.getElementById('__pwd_weak').value;
+  var i, stronghash = strongel.value, weakhash = weakel.value;
 
   for(i = 0; i < passwdelem.length; i++){
     passwdelem[i].value = usestrong ? stronghash : weakhash;
   }
 }
-
-
 
 var html = '';
 var style = 'style="height:100%;width:130px;margin:2px;padding:4px;border:1px solid #ccc;border-radius:2px;font-size:15px;line-height:20px"';
@@ -85,44 +82,44 @@ var passwdelem = [], usestrong = true, i, el;
 
 saltel.focus();
 
-for(i = 0;i<inputs.length;i++){
+for(i = 0;i < inputs.length; i++){
   el = inputs[i];
   if(el.getAttribute('type') == 'password' && ['__pwd_passwd', '__pwd_strong', '__pwd_weak'].indexOf(el.id) == -1){
-    passwdelem.push(el)
+    passwdelem.push(el);
   }
 }
 
 strongel.onfocus = function(){
   usestrong = true;
-  this.setAttribute('type', 'text')
+  this.setAttribute('type', 'text');
   updatepasswords();
 }
 
 strongel.onblur = function(){
-  this.setAttribute('type', 'password')
+  this.setAttribute('type', 'password');
 }
 
 weakel.onfocus = function(){
   usestrong = false;
-  this.setAttribute('type', 'text')
+  this.setAttribute('type', 'text');
   updatepasswords();
 }
 
 weakel.onblur = function(){
-  this.setAttribute('type', 'password')
+  this.setAttribute('type', 'password');
 }
 
 saltel.onkeyup = saltel.paste = saltel.onchange = 
 	domainel.onkeyup = domainel.paste = domainel.onchange = function(e){
-  var i, salt = saltel.value;
-  var domain = document.getElementById('__pwd_domain').value;
+  var salt = saltel.value, domain = document.getElementById('__pwd_domain').value;
 
   var stronghash = salt == "" ? "" : generate(domain, salt);
-  var weakhash = salt == "" ? "" : generate(domain, salt, true, 8)
-  document.getElementById('__pwd_strong').value = stronghash;
-  document.getElementById('__pwd_weak').value = weakhash;
+  var weakhash = salt == "" ? "" : generate(domain, salt, true, 8);
+
+  strongel.value = stronghash;
+  weakel.value = weakhash;
 
   updatepasswords();
 }
 
-})()
+})();
