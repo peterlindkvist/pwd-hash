@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>password hash</title>
-    <script type="text/javascript" src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js" ></script>
     <style>
   body {
     background-color:#274d7e;
@@ -27,7 +26,8 @@
       <input type="password" placeholder="weaker hash" id="__pwd_weak" value="" />
     </div>
     <div>
-      <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";void(0);'>Genereate Password</a>
+      Copy this link to bookmaks: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";void(0);'>Genereate Password</a>
     </div>
+    <script type="text/javascript" src="https://rawgithub.com/peterlindkvist/pwd-hash/master/passwd.js" ></script>
   </body>
 </html>
