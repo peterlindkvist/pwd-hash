@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>password hash</title>
-    <script src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js" />
+    <script type="text/javascript" src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js" ></script>
     <style>
   body {
     background-color:#274d7e;
@@ -17,7 +17,7 @@
     font-size:15px;
     line-height:20px
   } 
-  </style>
+    </style>
   </head>
   <body>
     <div>
