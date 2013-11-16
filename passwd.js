@@ -62,17 +62,18 @@ var updatepasswords = function(){
   }
 }
 
-var html = '';
-var style = 'style="height:100%;width:130px;margin:2px;padding:4px;border:1px solid #ccc;border-radius:2px;font-size:15px;line-height:20px"';
-html += '<input ' + style + ' type="text" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
-html += '<input ' + style + ' type="password" placeholder="enter password" id="__pwd_passwd" value=""/><br>';
-html += '<input ' + style + ' type="password" placeholder="strong hash" id="__pwd_strong" value="" />';
-html += '<input ' + style + ' type="password" placeholder="weaker hash" id="__pwd_weak" value="" />';
-var container = document.createElement('div');
-container.setAttribute('style', "position:fixed;top:0;left:0;background-color:#274d7e;z-index:10000;margin:0px;padding:2px");
-container.innerHTML = html;
-document.body.appendChild(container);
-
+if(!document.getElementById('__pwd_domain')){
+  var html = '';
+  var style = 'style="height:100%;width:130px;margin:2px;padding:4px;border:1px solid #ccc;border-radius:2px;font-size:15px;line-height:20px"';
+  html += '<input ' + style + ' type="url" autocomplete="off" placeholder="domain" id="__pwd_domain" value="' + domain + '"/>';
+  html += '<input ' + style + ' type="password" placeholder="enter password" id="__pwd_passwd" value=""/><br>';
+  html += '<input ' + style + ' type="password" placeholder="strong hash" id="__pwd_strong" value="" />';
+  html += '<input ' + style + ' type="password" placeholder="weaker hash" id="__pwd_weak" value="" />';
+  var container = document.createElement('div');
+  container.setAttribute('style', "position:fixed;top:0;left:0;background-color:#274d7e;z-index:100000;margin:0px;padding:2px");
+  container.innerHTML = html;
+  document.body.appendChild(container);
+}
 var domainel = document.getElementById('__pwd_domain');
 var saltel = document.getElementById('__pwd_passwd');
 var strongel = document.getElementById('__pwd_strong');
