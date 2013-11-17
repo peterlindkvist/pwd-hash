@@ -14,7 +14,11 @@
     border:1px solid #ccc;
     border-radius:2px;
     font-size:15px;
-    line-height:20px
+    line-height:20px;
+  }
+  
+  a {
+    color:#222; 
   } 
     </style>
   </head>
@@ -26,8 +30,9 @@
       <input type="password" placeholder="weaker hash" id="__pwd_weak" value="" />
     </div>
     <div>
-      Copy this link to bookmaks: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/master/passwd.js";void(0);'>Genereate Password</a>
+      Copy this link to bookmaks: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/v1.0/passwd.js";void(0);'>Genereate Password</a>
     </div>
-    <script type="text/javascript" src="https://rawgithub.com/peterlindkvist/pwd-hash/master/passwd.js" ></script>
+    <!-- can't link to raw github , must use rawgithub.com --> 
+    <script type="text/javascript" src="https://rawgithub.com/peterlindkvist/pwd-hash/v1.0/passwd.js"></script>
   </body>
 </html>
