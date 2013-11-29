@@ -30,7 +30,13 @@
       <input type="password" placeholder="weaker hash" id="__pwd_weak" value="" />
     </div>
     <div>
-      Copy this link to bookmaks: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/v1.0/passwd.js";void(0);'>Genereate Password</a>
+      <p>
+        Copy this link to bookmaks: <a href='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/v1.0/passwd.js";void(0);'>Genereate Password</a>
+      </p>
+      <p>
+        Or add a bookmark and add this code to the target of the bookmark<br>
+        <input type="text" value='javascript:document.body.appendChild(document.createElement("script")).src="https://raw.github.com/peterlindkvist/pwd-hash/v1.0/passwd.js";void(0);' />
+      </p>
     </div>
     <!-- can't link to raw github , must use rawgithub.com --> 
     <script type="text/javascript" src="https://rawgithub.com/peterlindkvist/pwd-hash/v1.0/passwd.js"></script>
