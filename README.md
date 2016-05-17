@@ -20,4 +20,11 @@ Due to some ssl restrictions, the code can not be runned in github.com
 4. Edit the name to generate password, or whathever, and paste the javascript in the field for the URL.
 5. Done. 
 
+## Development
+
+Use a web server and paste this to the browser
+
+    data:text/html,<html><body><script type="text/javascript" src="http://localhost:3000/index.js"></script><br><br><input type="password"></body></html>
+
+
 
