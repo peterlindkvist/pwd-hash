@@ -162,7 +162,7 @@ PwdHash.generate = function(domain, pwd, omitextrachars, len){
 };
 
 var pwd = new PwdHash();
-pwd.init(document.location.hostname === 'pwdhash.tndr.io' ? document.querySelector('.container') : null);
+pwd.init(document.location.hostname === 'peterlindkvist.github.io' ? document.querySelector('.container') : null);
 
 
 
