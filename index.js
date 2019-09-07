@@ -78,8 +78,11 @@ PwdHash.prototype.addEvents = function(){
 }
 
 PwdHash.prototype.update = function(){
-  var salt = this.inputSalt.value;
-  var domain = this.inputDomain.value;
+  var salt = this.inputSalt.value
+  var domain = this.inputDomain.value && this.inputDomain.value.toLowerCase();
+  domain = domain && domain.match(/^(?:https?:)?(?:\/\/)?([^\/\?]+)/)
+  domain = domain && domain[1].match(/([\w]+\.[\w]+?)(:[0-9]*)?$/)
+  domain = domain ? domain[1]: this.inputDomain.value
 
   var stronghash = salt === "" ? "" : PwdHash.generate(domain, salt);
   var weakhash = salt === "" ? "" : PwdHash.generate(domain, salt, true, 8);
